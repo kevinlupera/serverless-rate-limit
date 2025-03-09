@@ -1,0 +1,23 @@
+service: serverless-rate-limit
+
+plugins:
+  - serverless-esbuild # used for compiling/packaging the Typescript code
+  - serverless-offline # used for local execution
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  stage: ${opt:stage}
+  timeout: 29   # repository wide Lambda timeout
+  environment:  # repository wide Lambda env variables
+    STAGE: ${self:provider.stage}
+
+functions:
+  # Serverless Framework specific syntax
+  demo-rate-limit:
+    handler: ./src/demo-rate-limit.handler
+    events:
+      - httpApi:
+          path: /api/v1/demo
+          method: GET

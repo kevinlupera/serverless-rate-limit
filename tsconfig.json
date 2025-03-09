@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "lib": ["ES2022"],
+      "module": "ES2022",
+      "moduleResolution": "Bundler", // introduced in TypeScript 5.0
+      "allowSyntheticDefaultImports": true,
+      "sourceMap": true,
+      "target": "ES2022",
+      "strict": true
+    },
+    "include": ["src/**/*.ts", "tests/basic.test.ts", "tests/demo-rate-limit.test.ts", "tests/integration.test.ts"],
+    "exclude": ["node_modules", "dist"]
+  }

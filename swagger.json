@@ -1,0 +1,173 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Serverless Rate Limiting API",
+    "description": "An API demonstrating rate limiting implementation using Upstash Redis with AWS Lambda. This API limits requests based on the client's IP address using a sliding window algorithm.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Kevin Lupera"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.example.com",
+      "description": "Production server"
+    },
+    {
+      "url": "https://dev-api.example.com",
+      "description": "Development server"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development with Serverless Offline"
+    }
+  ],
+  "paths": {
+    "/api/v1/demo": {
+      "get": {
+        "summary": "Rate-limited demo endpoint",
+        "description": "Demonstrates rate limiting functionality. Each IP address is allowed 10 requests per 10-second window. Exceeding this limit will result in a 429 Too Many Requests response.",
+        "operationId": "demoRateLimit",
+        "tags": [
+          "Rate Limiting"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response when rate limit is not exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Indicates if the request was successful (not rate limited)",
+                      "example": true
+                    },
+                    "limit": {
+                      "type": "integer",
+                      "description": "The maximum number of requests allowed in the time window",
+                      "example": 10
+                    },
+                    "remaining": {
+                      "type": "integer",
+                      "description": "The number of requests remaining in the current time window",
+                      "example": 9
+                    },
+                    "timeResult": {
+                      "type": "string",
+                      "description": "Time taken to process the rate limit check",
+                      "example": "23 milliseconds"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Indicates if the request was successful (false when rate limited)",
+                      "example": false
+                    },
+                    "limit": {
+                      "type": "integer",
+                      "description": "The maximum number of requests allowed in the time window",
+                      "example": 10
+                    },
+                    "remaining": {
+                      "type": "integer",
+                      "description": "The number of requests remaining in the current time window",
+                      "example": 0
+                    },
+                    "timeResult": {
+                      "type": "string",
+                      "description": "Time taken to process the rate limit check",
+                      "example": "18 milliseconds"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Internal server error occurred"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RateLimitResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Indicates if the request was successful (not rate limited)"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The maximum number of requests allowed in the time window"
+          },
+          "remaining": {
+            "type": "integer",
+            "description": "The number of requests remaining in the current time window"
+          },
+          "timeResult": {
+            "type": "string",
+            "description": "Time taken to process the rate limit check"
+          }
+        },
+        "required": [
+          "success",
+          "limit",
+          "remaining",
+          "timeResult"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Rate Limiting",
+      "description": "Endpoints demonstrating rate limiting functionality"
+    }
+  ],
+  "externalDocs": {
+    "description": "Project Repository",
+    "url": "https://github.com/yourusername/serverless-rate-limit"
+  }
+} 
