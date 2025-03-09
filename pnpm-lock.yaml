@@ -369,6 +369,7 @@ packages:
 
   '@effect/schema@0.73.4':
     resolution: {integrity: sha512-Vjgu+EuG6eyh3oB21jpHv0l9ZgGZCyVZf3lXs+2X18UEUOkppvpw11heHiK02iJCVchgp3Qjw/GDPUqhQvKpSg==}
+    deprecated: this package has been merged into the main effect package
     peerDependencies:
       effect: ^3.8.3
 
@@ -1421,8 +1422,8 @@ packages:
     resolution: {integrity: sha512-x511uiJ/57FIsbgUe5csJ13k3uzu25uWQE+XqfBis/sB0SFoiElJWXRkgEAUh0U6n40eT3ay5Ue4oPkRMu1LYw==}
     engines: {node: '>= 10.0.0'}
 
-  axios@1.7.9:
-    resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
+  axios@1.8.2:
+    resolution: {integrity: sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -5457,7 +5458,7 @@ snapshots:
     dependencies:
       adm-zip: 0.5.16
       archiver: 5.3.2
-      axios: 1.7.9
+      axios: 1.8.2
       fast-glob: 3.3.3
       https-proxy-agent: 5.0.1(supports-color@8.1.1)
       ignore: 5.3.2
@@ -6196,7 +6197,7 @@ snapshots:
       uuid: 8.0.0
       xml2js: 0.6.2
 
-  axios@1.7.9:
+  axios@1.8.2:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.1
